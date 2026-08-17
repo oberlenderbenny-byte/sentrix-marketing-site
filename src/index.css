@@ -1,0 +1,54 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body, #root { height: 100%; }
+html {
+  background: #040a14;
+}
+body {
+  background: #040a14;
+  color: #c8d8e8;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100%;
+}
+a { color: inherit; text-decoration: none; }
+
+/* Animated floor-plan background (sensor pins, zone overlays, wall sparks) */
+.sensor-pin {
+  animation: pinBlink 2.4s ease-in-out infinite;
+}
+.sensor-pin.drift {
+  animation: pinBlink 2.4s ease-in-out infinite, pinDrift 5.5s ease-in-out infinite;
+}
+.zone-poly {
+  animation: zonePulse 4s ease-in-out infinite;
+}
+.zone-poly.drift {
+  animation: zonePulseDrift 4s ease-in-out infinite;
+}
+.wall-spark {
+  stroke: currentColor;
+}
+@keyframes pinBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.18; }
+}
+@keyframes pinDrift {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(7px, -5px); }
+}
+@keyframes zonePulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.09); }
+}
+@keyframes zonePulseDrift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-5px, 4px) scale(1.09); }
+}
+@keyframes sparkTravel {
+  to { stroke-dashoffset: -2000; }
+}
