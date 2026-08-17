@@ -11,7 +11,7 @@ const CAPABILITIES = [
     title: "Threat intelligence for the ground around your location",
     description:
       "Before a single sensor goes up, Sentrix scans the perimeter itself: nearby roads and access routes, buildings, vegetation, and blind spots, scored for access risk and concealment. That analysis feeds directly into where sensors get placed and which reference scenarios apply — checked against external data sources, not just a template.",
-    image: "/images/cap-perimeter.jpg",
+    image: "/images/cap-perimeter-fence.jpg",
   },
   {
     eyebrow: "Investigate like you were there",

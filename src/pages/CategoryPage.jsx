@@ -33,7 +33,7 @@ const CAPABILITY_BY_SLUG = {
     title: "Threat intelligence for the ground around your facility",
     description:
       "Before a single sensor goes up, Sentrix scans the perimeter itself: access roads, gates, fence lines, and blind spots, scored for access risk and concealment. That analysis is what decides where cameras and LPR actually go — not a generic template.",
-    image: "/images/cap-perimeter.jpg",
+    image: "/images/cap-perimeter-fence.jpg",
     imageAlt: "Location perimeter and access-route threat analysis",
   },
   corporate: {
