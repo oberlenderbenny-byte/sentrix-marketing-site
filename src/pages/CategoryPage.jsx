@@ -10,6 +10,7 @@ import TechStats from "../components/TechStats";
 import ProductScreenshot from "../components/ProductScreenshot";
 import PlatformCapabilities from "../components/PlatformCapabilities";
 import CapabilityHighlight from "../components/CapabilityHighlight";
+import useDocumentMeta from "../hooks/useDocumentMeta";
 
 const CAPABILITY_BY_SLUG = {
   retail: {
@@ -50,6 +51,12 @@ const CAPABILITY_BY_SLUG = {
 export default function CategoryPage() {
   const { slug } = useParams();
   const cat = getCategory(slug);
+
+  useDocumentMeta({
+    title: cat ? cat.name : undefined,
+    description: cat ? cat.description : undefined,
+    path: `/solutions/${slug}`,
+  });
 
   if (!cat) return <Navigate to="/" replace />;
 

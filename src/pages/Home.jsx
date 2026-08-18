@@ -6,8 +6,14 @@ import FloorPlanBg from "../components/FloorPlanBg";
 import SelfServeC2 from "../components/SelfServeC2";
 import { IconBolt } from "../components/icons";
 import { categories } from "../data/categories";
+import useDocumentMeta from "../hooks/useDocumentMeta";
 
 export default function Home() {
+  useDocumentMeta({
+    description: "Sentrix is an AI-verified command-and-control platform for physical security. Deploy a full monitoring system yourself — no security expert needed.",
+    path: "/",
+  });
+
   const mainRef = useRef(null);
   const selfServeRef = useRef(null);
   const [showBar, setShowBar] = useState(false);

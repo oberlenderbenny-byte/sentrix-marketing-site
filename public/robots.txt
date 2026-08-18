@@ -1,0 +1,23 @@
+# Sentrix — robots.txt
+# Allow standard search engine crawlers
+User-agent: *
+Allow: /
+
+# Explicitly allow AI crawlers used for grounding / answer engines
+# (Google-Extended covers Gemini; the others cover ChatGPT, Claude, Perplexity)
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+Sitemap: https://sentrix-marketing-site.vercel.app/sitemap.xml

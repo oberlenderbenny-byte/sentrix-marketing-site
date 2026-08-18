@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import useDocumentMeta from "../hooks/useDocumentMeta";
 
 const FACTORS = [
   { label: "Number of locations", body: "One HQ or a hundred branches — the platform scales the same way." },
@@ -52,6 +53,12 @@ const ROWS = [
 ];
 
 export default function Pricing() {
+  useDocumentMeta({
+    title: "Pricing",
+    description: "Sentrix pricing scales with your locations, sensors, and integrations — from a single site to a multi-location network.",
+    path: "/pricing",
+  });
+
   const navigate = useNavigate();
 
   const close = () => {

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import useDocumentMeta from "../hooks/useDocumentMeta";
 
 const PILLARS = [
   {
@@ -22,6 +23,12 @@ const PILLARS = [
 ];
 
 export default function About() {
+  useDocumentMeta({
+    title: "About",
+    description: "Sentrix brings two decades of tactical command-and-control experience into an AI-verified physical security platform built for fast deployment.",
+    path: "/about",
+  });
+
   return (
     <div>
       <Header dark onHamburger={() => {}} />

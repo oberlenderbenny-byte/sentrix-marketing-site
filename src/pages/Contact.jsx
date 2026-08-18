@@ -3,8 +3,15 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { submitToInbox } from "../utils/submitForm";
+import useDocumentMeta from "../hooks/useDocumentMeta";
 
 export default function Contact() {
+  useDocumentMeta({
+    title: "Contact",
+    description: "Talk to Sentrix about a demo, pricing, or a partnership — we reply within one business day.",
+    path: "/contact",
+  });
+
   const [status, setStatus] = useState("idle"); // idle | loading | success | error
   const navigate = useNavigate();
 
