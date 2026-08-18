@@ -63,13 +63,13 @@ export default function Home() {
             a concrete claim, and a one-line reason to believe it. */}
         <button
           onClick={scrollToSelfServe}
-          className="group hidden sm:block absolute top-28 right-6 md:right-16 z-20 w-[280px] text-left bg-panel/95 backdrop-blur border border-accent/50 rounded-lg px-5 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.5)] hover:border-accent transition-colors"
+          className="group hidden sm:block absolute top-28 right-6 md:right-16 z-20 w-[280px] text-left bg-panel/95 backdrop-blur border border-[#fac775]/55 rounded-lg px-5 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.5)] hover:border-[#fac775] transition-colors"
         >
           <div className="flex items-center gap-2 mb-2.5">
-            <span className="w-6 h-6 rounded-full bg-accent/15 flex items-center justify-center text-accent">
+            <span className="w-6 h-6 rounded-full bg-[#fac775]/15 flex items-center justify-center text-[#fac775]">
               <IconBolt size={13} />
             </span>
-            <span className="text-[10px] font-bold tracking-[1.5px] uppercase text-accent">
+            <span className="text-[10px] font-bold tracking-[1.5px] uppercase text-[#fac775]">
               Industry first
             </span>
           </div>
@@ -79,7 +79,7 @@ export default function Home() {
           <p className="text-[12.5px] text-textDim leading-relaxed mb-2.5">
             A built-in engine recommends your sensor types, counts, and placement — before you buy anything.
           </p>
-          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-accent">
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#fac775]">
             See how it works
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
               <path d="M9 6l6 6-6 6" />
