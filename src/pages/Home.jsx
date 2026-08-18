@@ -31,7 +31,7 @@ export default function Home() {
       <section className="relative h-screen w-full overflow-hidden flex items-end">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: "url(/images/hero-camera.jpg)" }}
+          style={{ backgroundImage: "url(/images/hero-fence-sunset.jpg)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-bg/10" />
         <div className="relative z-10 w-full px-6 md:px-16 pb-24">
