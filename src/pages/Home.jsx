@@ -3,6 +3,7 @@ import Header from "../components/Header";
 import CategoryBar from "../components/CategoryBar";
 import Footer from "../components/Footer";
 import FloorPlanBg from "../components/FloorPlanBg";
+import SelfServeC2 from "../components/SelfServeC2";
 import { categories } from "../data/categories";
 
 export default function Home() {
@@ -79,6 +80,8 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      <SelfServeC2 />
 
       <Footer />
 
