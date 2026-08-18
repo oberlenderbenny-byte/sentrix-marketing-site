@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import { Link } from "react-router-dom";
 import { IconTarget, IconSensor, IconLayers } from "./icons";
 
@@ -19,11 +20,16 @@ const STEPS = [
   },
 ];
 
-export default function SelfServeC2({ accent = "#60a5fa" }) {
+const SelfServeC2 = forwardRef(function SelfServeC2({ accent = "#60a5fa" }, ref) {
   return (
-    <section className="relative border-t border-border px-6 md:px-16 py-24 overflow-hidden">
+    <section ref={ref} className="relative border-t border-border px-6 md:px-16 py-24 overflow-hidden">
       <div
-        className="absolute inset-0 opacity-[0.07] pointer-events-none"
+        className="absolute inset-0 bg-cover bg-center opacity-[0.16]"
+        style={{ backgroundImage: "url(/images/hero-camera.jpg)" }}
+      />
+      <div className="absolute inset-0 bg-bg/85" />
+      <div
+        className="absolute inset-0 opacity-[0.1] pointer-events-none"
         style={{ background: `radial-gradient(circle at 20% 20%, ${accent}, transparent 55%)` }}
       />
       <div className="relative max-w-5xl mx-auto text-center mb-16">
@@ -76,4 +82,6 @@ export default function SelfServeC2({ accent = "#60a5fa" }) {
       </div>
     </section>
   );
-}
+});
+
+export default SelfServeC2;

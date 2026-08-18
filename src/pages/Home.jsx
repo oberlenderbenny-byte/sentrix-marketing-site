@@ -8,6 +8,7 @@ import { categories } from "../data/categories";
 
 export default function Home() {
   const mainRef = useRef(null);
+  const selfServeRef = useRef(null);
   const [showBar, setShowBar] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
 
@@ -22,6 +23,10 @@ export default function Home() {
 
   const scrollToMain = () => {
     mainRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const scrollToSelfServe = () => {
+    selfServeRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -41,6 +46,15 @@ export default function Home() {
             bottom gradient above which is tuned for the headline text instead. */}
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-bg/80 via-bg/30 to-transparent" />
         <div className="relative z-10 w-full px-6 md:px-16 pb-24">
+          <button
+            onClick={scrollToSelfServe}
+            className="group flex items-center gap-2 text-xs font-bold tracking-[1.5px] uppercase text-accent bg-accent/10 border border-accent/40 rounded-full pl-3.5 pr-3 py-1.5 mb-4 hover:bg-accent/20 hover:border-accent transition-colors"
+          >
+            New: no security expert needed
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </button>
           <span className="inline-block text-xs font-bold tracking-[1.5px] uppercase text-accent border border-borderStrong rounded-full px-3.5 py-1.5 mb-6">
             AI-verified physical security
           </span>
@@ -81,7 +95,7 @@ export default function Home() {
         </div>
       </section>
 
-      <SelfServeC2 />
+      <SelfServeC2 ref={selfServeRef} />
 
       <Footer />
 
