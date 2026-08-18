@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { categories } from "../data/categories";
+import { submitToInbox } from "../utils/submitForm";
 
 const PLATFORM_FEATURES = [
   { num: "01", title: "Rapid deployment", body: "Significantly faster to implement and roll out than legacy command-and-control systems — at a fraction of the cost." },
@@ -30,11 +31,21 @@ function SectionHead({ eyebrow, title, body }) {
 }
 
 export default function LegacySections() {
-  const [status, setStatus] = useState("idle");
+  const [status, setStatus] = useState("idle"); // idle | loading | success | error
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
-    setStatus("success");
+    const form = e.target;
+    if (form.botcheck.checked) return; // honeypot
+    setStatus("loading");
+    try {
+      const data = Object.fromEntries(new FormData(form).entries());
+      await submitToInbox(data, { subject: "New demo request — Sentrix", formName: "Request a demo" });
+      setStatus("success");
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    }
   };
 
   return (
@@ -124,18 +135,22 @@ export default function LegacySections() {
               </div>
             ) : (
               <form onSubmit={onSubmit} className="flex flex-col gap-3">
+                <input type="checkbox" name="botcheck" className="hidden" tabIndex="-1" autoComplete="off" />
                 <div className="grid sm:grid-cols-2 gap-3">
-                  <input required placeholder="Full name" className="bg-panel border border-border rounded-md px-4 py-3 text-sm text-white placeholder:text-textMuted outline-none focus:border-accent" />
-                  <input required placeholder="Company" className="bg-panel border border-border rounded-md px-4 py-3 text-sm text-white placeholder:text-textMuted outline-none focus:border-accent" />
+                  <input required name="name" placeholder="Full name" className="bg-panel border border-border rounded-md px-4 py-3 text-sm text-white placeholder:text-textMuted outline-none focus:border-accent" />
+                  <input required name="company" placeholder="Company" className="bg-panel border border-border rounded-md px-4 py-3 text-sm text-white placeholder:text-textMuted outline-none focus:border-accent" />
                 </div>
                 <div className="grid sm:grid-cols-2 gap-3">
-                  <input required type="email" placeholder="Work email" className="bg-panel border border-border rounded-md px-4 py-3 text-sm text-white placeholder:text-textMuted outline-none focus:border-accent" />
-                  <input type="tel" placeholder="Phone" className="bg-panel border border-border rounded-md px-4 py-3 text-sm text-white placeholder:text-textMuted outline-none focus:border-accent" />
+                  <input required type="email" name="email" placeholder="Work email" className="bg-panel border border-border rounded-md px-4 py-3 text-sm text-white placeholder:text-textMuted outline-none focus:border-accent" />
+                  <input type="tel" name="phone" placeholder="Phone" className="bg-panel border border-border rounded-md px-4 py-3 text-sm text-white placeholder:text-textMuted outline-none focus:border-accent" />
                 </div>
-                <textarea rows={3} placeholder="How many locations are you looking to cover?" className="bg-panel border border-border rounded-md px-4 py-3 text-sm text-white placeholder:text-textMuted outline-none focus:border-accent resize-none" />
-                <button type="submit" className="bg-accent text-[#04101f] font-bold rounded-md py-3.5 text-sm hover:bg-[#7db4fb] transition-colors">
-                  Request a demo
+                <textarea rows={3} name="locations" placeholder="How many locations are you looking to cover?" className="bg-panel border border-border rounded-md px-4 py-3 text-sm text-white placeholder:text-textMuted outline-none focus:border-accent resize-none" />
+                <button type="submit" disabled={status === "loading"} className="bg-accent text-[#04101f] font-bold rounded-md py-3.5 text-sm hover:bg-[#7db4fb] transition-colors disabled:opacity-60">
+                  {status === "loading" ? "Sending…" : "Request a demo"}
                 </button>
+                {status === "error" && (
+                  <p className="text-xs text-red-400 text-center">Something went wrong — please try again, or email us directly.</p>
+                )}
                 <p className="text-xs text-textMuted text-center">We'll reply within one business day.</p>
               </form>
             )}
