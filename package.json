@@ -5,8 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && (npx playwright install chromium || true) && (node scripts/prerender.mjs || echo 'Prerender skipped (browser unavailable) — deploying CSR-only build')",
-    "prerender": "node scripts/prerender.mjs",
+    "build": "vite build",
+    "prerender": "vite build && node scripts/prerender.mjs",
     "lint": "oxlint",
     "preview": "vite preview"
   },
