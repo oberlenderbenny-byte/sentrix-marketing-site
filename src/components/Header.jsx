@@ -1,13 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header({ onHamburger, dark = false }) {
+  const { pathname } = useLocation();
+
+  // If we're already on the home page, a normal <Link to="/"> is a no-op —
+  // React Router won't remount or scroll. Force it to behave like a fresh
+  // visit: jump straight back to the top of the hero.
+  const handleLogoClick = (e) => {
+    if (pathname === "/") {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: "auto" });
+    }
+  };
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-[100] flex items-center justify-between px-6 md:px-10 h-[76px] ${
         dark ? "bg-bg/90 backdrop-blur border-b border-border" : "bg-transparent"
       }`}
     >
-      <Link to="/" className="flex items-center gap-2.5">
+      <Link to="/" onClick={handleLogoClick} className="flex items-center gap-2.5">
         <img src="/images/logo-mark.png" alt="Sentrix" className="w-9 h-9 object-contain" />
         <span className="font-extrabold tracking-wider text-[15px] text-white">SENTRIX</span>
       </Link>

@@ -16,6 +16,7 @@ export default function Home() {
 
   const mainRef = useRef(null);
   const selfServeRef = useRef(null);
+  const barWrapperRef = useRef(null);
   const [showBar, setShowBar] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
 
@@ -28,9 +29,12 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Once the bottom bar is visible, track the cursor across the *entire*
-  // viewport width (not just the 64px-tall bar itself) so hovering anywhere
-  // along a category's vertical column — not only the button — lights it up.
+  // Once the bottom bar is visible, track the cursor across a band just
+  // above it (not the whole page — that would fire while reading page
+  // copy up top) so hovering anywhere near a category's column, not only
+  // its 64px button, lights it up.
+  const HOVER_ZONE_HEIGHT = 340; // curtain (280px) + bar (64px) + a little buffer
+
   useEffect(() => {
     if (!showBar) {
       setActiveCategory(null);
@@ -38,6 +42,18 @@ export default function Home() {
     }
     const count = categories.length;
     const onMove = (e) => {
+      // Once the pointer is actually over the real bar/curtain element, let
+      // it manage its own state (button hover, links inside the curtain,
+      // etc.) — don't fight it by recomputing the category from raw x, or
+      // moving toward a link on the left edge would flip you to a different
+      // category before you ever reach it.
+      if (barWrapperRef.current && barWrapperRef.current.contains(e.target)) {
+        return;
+      }
+      if (e.clientY < window.innerHeight - HOVER_ZONE_HEIGHT) {
+        setActiveCategory(null);
+        return;
+      }
       const idx = Math.min(
         count - 1,
         Math.max(0, Math.floor((e.clientX / window.innerWidth) * count))
@@ -174,6 +190,7 @@ export default function Home() {
       })()}
 
       <div
+        ref={barWrapperRef}
         className={`fixed left-0 right-0 bottom-0 z-[80] transition-transform duration-500 ease-out ${
           showBar ? "translate-y-0" : "translate-y-full"
         }`}
