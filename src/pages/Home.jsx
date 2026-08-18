@@ -127,6 +127,27 @@ export default function Home() {
 
       <Footer />
 
+      {/* Full-height hover column — signals that each bottom-bar item opens a
+          full menu below it, not just a category label. Position is derived
+          from the item's index so it lines up exactly with its button. */}
+      {(() => {
+        const activeIdx = categories.findIndex((c) => c.slug === activeCategory);
+        const count = categories.length;
+        const idx = activeIdx === -1 ? 0 : activeIdx;
+        return (
+          <div
+            className="fixed inset-y-0 z-[75] pointer-events-none transition-all duration-300 ease-out"
+            style={{
+              left: `${(idx / count) * 100}%`,
+              width: `${(1 / count) * 100}%`,
+              opacity: activeIdx === -1 ? 0 : 1,
+              background:
+                "linear-gradient(180deg, rgba(255,255,255,0.16) 0%, rgba(255,255,255,0.05) 55%, rgba(255,255,255,0.16) 100%)",
+            }}
+          />
+        );
+      })()}
+
       <div
         className={`fixed left-0 right-0 bottom-0 z-[80] transition-transform duration-500 ease-out ${
           showBar ? "translate-y-0" : "translate-y-full"
