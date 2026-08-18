@@ -7,16 +7,20 @@ const STEPS = [
     Icon: IconLayers,
     title: "Tell us about the site",
     body: "Address, floor plan or rough layout, and what you're protecting — no security background needed.",
+    color: "#60a5fa",
   },
   {
     Icon: IconTarget,
     title: "Sentrix scores the risk",
     body: "The same AI that scans perimeters and zones for enterprise deployments analyzes your location and its surroundings.",
+    color: "#5dcaa5",
   },
   {
     Icon: IconSensor,
     title: "Get your sensor plan",
     body: "A concrete recommendation: which sensor types, how many, and exactly where to place them — before you buy anything.",
+    color: "#fac775",
+    highlight: true,
   },
 ];
 
@@ -53,20 +57,36 @@ const SelfServeC2 = forwardRef(function SelfServeC2({ accent = "#60a5fa" }, ref)
         </p>
       </div>
 
-      <div className="relative grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto mb-14">
-        {STEPS.map(({ Icon, title, body }, i) => (
+      <div className="relative grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto mb-14 items-stretch">
+        {STEPS.map(({ Icon, title, body, color, highlight }, i) => (
           <div
             key={title}
-            className="bg-panel border border-border rounded-xl p-7 relative"
-            style={{ borderColor: accent + "33" }}
+            className={`rounded-xl p-7 relative border ${highlight ? "sm:-translate-y-2" : "bg-panel"}`}
+            style={
+              highlight
+                ? {
+                    borderColor: color + "80",
+                    background: `linear-gradient(160deg, ${color}1f, ${"#0a1420"} 65%)`,
+                    boxShadow: `0 16px 36px ${color}22`,
+                  }
+                : { borderColor: color + "33" }
+            }
           >
+            {highlight && (
+              <span
+                className="absolute -top-3 left-7 text-[10px] font-bold tracking-[1.5px] uppercase px-2.5 py-1 rounded-full"
+                style={{ background: color, color: "#3a2a10" }}
+              >
+                Your result
+              </span>
+            )}
             <div
               className="w-11 h-11 rounded-full flex items-center justify-center border mb-5"
-              style={{ borderColor: accent + "55", color: accent }}
+              style={{ borderColor: color + "70", color, background: color + "14" }}
             >
               <Icon size={20} />
             </div>
-            <div className="text-xs font-bold tracking-[1.5px] uppercase mb-2" style={{ color: accent }}>
+            <div className="text-xs font-bold tracking-[1.5px] uppercase mb-2" style={{ color }}>
               Step {i + 1}
             </div>
             <h3 className="text-[16px] font-bold text-white mb-2">{title}</h3>
