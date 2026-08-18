@@ -69,6 +69,18 @@ export default function CategoryPage() {
               "linear-gradient(180deg, rgba(4,10,20,0.35) 0%, rgba(4,10,20,0.55) 50%, #040a14 100%)",
           }}
         />
+        <Link
+          to="/"
+          aria-label="Back to solutions"
+          className="absolute top-[96px] left-6 md:left-16 z-20 inline-flex items-center gap-2 text-white/85 text-sm font-semibold hover:text-white transition-colors group"
+        >
+          <span className="w-9 h-9 rounded-full border border-white/35 flex items-center justify-center group-hover:border-white transition-colors">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </span>
+          <span className="hidden sm:inline">Back to solutions</span>
+        </Link>
         <div className="relative z-10 w-full px-6 md:px-16 pb-16">
           <span
             className="inline-block text-xs font-bold tracking-[2px] uppercase mb-5"
@@ -101,25 +113,27 @@ export default function CategoryPage() {
         </>
       ) : (
         <>
-          <section className="px-6 md:px-16 py-20 max-w-3xl mx-auto">
-            <p className="text-[17px] text-text leading-relaxed mb-10">{cat.description}</p>
+          <div className="bg-white">
+            <section className="px-6 md:px-16 py-20 max-w-3xl mx-auto">
+              <p className="text-[17px] text-gray-700 leading-relaxed mb-10">{cat.description}</p>
 
-            <div className="grid sm:grid-cols-3 gap-4">
-              {cat.subcategories.map((sub) => (
-                <div
-                  key={sub}
-                  className="bg-panel border border-border rounded-lg px-5 py-6 text-[15px] font-semibold text-white"
-                  style={{ borderColor: cat.accent + "33" }}
-                >
-                  {sub}
-                </div>
-              ))}
-            </div>
-          </section>
+              <div className="grid sm:grid-cols-3 gap-4">
+                {cat.subcategories.map((sub) => (
+                  <div
+                    key={sub}
+                    className="bg-white border border-gray-200 rounded-lg px-5 py-6 text-[15px] font-semibold text-[#0a1420] shadow-sm"
+                    style={{ borderColor: cat.accent + "40" }}
+                  >
+                    {sub}
+                  </div>
+                ))}
+              </div>
+            </section>
 
-          <UseCases items={cat.useCases} accent={cat.accent} />
-          <CapabilityHighlight accent={cat.accent} {...CAPABILITY_BY_SLUG[cat.slug]} />
-          <KeyFeatures accent={cat.accent} />
+            <UseCases items={cat.useCases} accent={cat.accent} light />
+            <CapabilityHighlight accent={cat.accent} light {...CAPABILITY_BY_SLUG[cat.slug]} />
+            <KeyFeatures accent={cat.accent} light />
+          </div>
           <CTABand
             title={`See how Sentrix adapts to ${cat.name.toLowerCase()}.`}
             accent={cat.accent}

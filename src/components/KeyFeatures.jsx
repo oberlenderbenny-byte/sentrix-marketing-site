@@ -8,10 +8,10 @@ const FEATURES = [
   { Icon: IconTarget, label: "AI-verified alerts" },
 ];
 
-export default function KeyFeatures({ accent = "#60a5fa" }) {
+export default function KeyFeatures({ accent = "#60a5fa", light = false }) {
   return (
-    <section className="px-6 md:px-16 py-16 border-t border-border">
-      <h3 className="text-center text-xs font-bold tracking-[1.5px] uppercase text-textDim mb-10">
+    <section className={`px-6 md:px-16 py-16 border-t ${light ? "border-gray-200" : "border-border"}`}>
+      <h3 className={`text-center text-xs font-bold tracking-[1.5px] uppercase mb-10 ${light ? "text-gray-500" : "text-textDim"}`}>
         Key features
       </h3>
       <div className="flex flex-wrap justify-center gap-x-12 gap-y-10 max-w-4xl mx-auto">
@@ -23,7 +23,7 @@ export default function KeyFeatures({ accent = "#60a5fa" }) {
             >
               <Icon />
             </div>
-            <span className="text-sm font-semibold text-text">{label}</span>
+            <span className={`text-sm font-semibold ${light ? "text-[#0a1420]" : "text-text"}`}>{label}</span>
           </div>
         ))}
       </div>

@@ -30,9 +30,10 @@ export default function Home() {
       {/* Hero screen */}
       <section className="relative h-screen w-full overflow-hidden flex items-end">
         <div
-          className="absolute inset-0 bg-cover bg-center"
+          className="absolute inset-0 bg-cover bg-center hero-bg-sun"
           style={{ backgroundImage: "url(/images/hero-fence-sunset.jpg)" }}
         />
+        <div className="absolute inset-0 hero-glow-sun pointer-events-none" />
         <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-bg/10" />
         {/* Top scrim — keeps the header logo/nav legible regardless of how bright
             the hero photo is at the top (e.g. a light sky), independent of the

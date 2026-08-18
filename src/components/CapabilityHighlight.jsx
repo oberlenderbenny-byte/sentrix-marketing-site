@@ -12,9 +12,10 @@ export default function CapabilityHighlight({
   description,
   image,
   imageAlt,
+  light = false,
 }) {
   return (
-    <section className="px-6 md:px-16 py-20 border-t border-border">
+    <section className={`px-6 md:px-16 py-20 border-t ${light ? "border-gray-200" : "border-border"}`}>
       <div className="grid md:grid-cols-2 gap-10 items-center max-w-6xl mx-auto">
         <div>
           <span
@@ -23,10 +24,10 @@ export default function CapabilityHighlight({
           >
             {eyebrow}
           </span>
-          <h3 className="text-xl md:text-2xl font-extrabold text-white mb-4 leading-snug">
+          <h3 className={`text-xl md:text-2xl font-extrabold mb-4 leading-snug ${light ? "text-[#0a1420]" : "text-white"}`}>
             {title}
           </h3>
-          <p className="text-textDim text-[15px] leading-relaxed">{description}</p>
+          <p className={`text-[15px] leading-relaxed ${light ? "text-gray-600" : "text-textDim"}`}>{description}</p>
         </div>
         <div
           className="rounded-xl overflow-hidden border shadow-2xl max-h-[380px]"
@@ -39,7 +40,7 @@ export default function CapabilityHighlight({
         {ALL_PILLS.map((item) => (
           <span
             key={item}
-            className="px-4 py-2 rounded-full border text-xs font-semibold text-textDim"
+            className={`px-4 py-2 rounded-full border text-xs font-semibold ${light ? "text-gray-600" : "text-textDim"}`}
             style={{ borderColor: accent + "40" }}
           >
             {item}
