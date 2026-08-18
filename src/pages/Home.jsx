@@ -28,6 +28,31 @@ export default function Home() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  // Once the bottom bar is visible, track the cursor across the *entire*
+  // viewport width (not just the 64px-tall bar itself) so hovering anywhere
+  // along a category's vertical column — not only the button — lights it up.
+  useEffect(() => {
+    if (!showBar) {
+      setActiveCategory(null);
+      return;
+    }
+    const count = categories.length;
+    const onMove = (e) => {
+      const idx = Math.min(
+        count - 1,
+        Math.max(0, Math.floor((e.clientX / window.innerWidth) * count))
+      );
+      setActiveCategory(categories[idx].slug);
+    };
+    const onLeave = () => setActiveCategory(null);
+    window.addEventListener("mousemove", onMove);
+    document.documentElement.addEventListener("mouseleave", onLeave);
+    return () => {
+      window.removeEventListener("mousemove", onMove);
+      document.documentElement.removeEventListener("mouseleave", onLeave);
+    };
+  }, [showBar]);
+
   const scrollToMain = () => {
     mainRef.current?.scrollIntoView({ behavior: "smooth" });
   };

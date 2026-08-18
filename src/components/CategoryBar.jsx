@@ -7,10 +7,7 @@ export default function CategoryBar({ active, onActiveChange = () => {} }) {
   const activeCat = categories.find((c) => c.slug === active);
 
   return (
-    <div
-      className="relative w-full"
-      onMouseLeave={() => onActiveChange(null)}
-    >
+    <div className="relative w-full">
       <AnimatePresence>
         {activeCat && (
           <motion.div
