@@ -33,7 +33,14 @@ export default function Home() {
   // above it (not the whole page — that would fire while reading page
   // copy up top) so hovering anywhere near a category's column, not only
   // its 64px button, lights it up.
-  const HOVER_ZONE_HEIGHT = 340; // curtain (280px) + bar (64px) + a little buffer
+  // Deliberately smaller than the curtain's own height: this only needs to
+  // cover the small gap right above the 64px bar so the target doesn't feel
+  // pixel-precise. Making it as tall as the curtain itself (280px+) reaches
+  // up into unrelated page content (e.g. the self-serve CTA) — the curtain
+  // would then pop open and physically cover that button before the cursor
+  // ever gets there, since once it's open the pointer lands on the curtain
+  // instead, and the button becomes unreachable.
+  const HOVER_ZONE_HEIGHT = 110;
 
   useEffect(() => {
     if (!showBar) {
