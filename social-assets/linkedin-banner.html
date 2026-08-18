@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+  html,body{margin:0;padding:0;}
+  .banner{
+    width:1128px;height:191px;
+    background:linear-gradient(120deg,#040a14 0%,#0a1626 55%,#0d1f36 100%);
+    display:flex;align-items:center;justify-content:flex-start;
+    padding:0 60px;box-sizing:border-box;
+    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+    position:relative;overflow:hidden;
+  }
+  .glow{
+    position:absolute;top:-80px;right:60px;width:320px;height:320px;border-radius:50%;
+    background:radial-gradient(circle,rgba(96,165,250,0.3),transparent 70%);
+  }
+  .badge{
+    position:absolute;right:60px;top:50%;transform:translateY(-50%);
+    border:1px solid rgba(250,199,117,0.5);border-radius:999px;
+    padding:9px 18px;z-index:2;
+  }
+  .badge span{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#fac775;white-space:nowrap;}
+  .left{display:flex;align-items:center;gap:22px;position:relative;z-index:2;}
+  .logo{width:78px;height:78px;flex-shrink:0;}
+  .word{font-size:34px;font-weight:800;letter-spacing:3px;color:#ffffff;white-space:nowrap;}
+  .tag{font-size:15px;color:#7690b3;margin-top:4px;letter-spacing:0.3px;white-space:nowrap;}
+</style>
+</head>
+<body>
+  <div class="banner">
+    <div class="glow"></div>
+    <div class="left">
+      <img class="logo" src="/images/logo-mark.png" />
+      <div>
+        <div class="word">SENTRIX</div>
+        <div class="tag">AI-verified physical security</div>
+      </div>
+    </div>
+    <div class="badge"><span>No security expert needed</span></div>
+  </div>
+</body>
+</html>
