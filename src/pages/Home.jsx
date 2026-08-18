@@ -50,7 +50,11 @@ export default function Home() {
       if (barWrapperRef.current && barWrapperRef.current.contains(e.target)) {
         return;
       }
-      if (e.clientY < window.innerHeight - HOVER_ZONE_HEIGHT) {
+      // Don't let the curtain pop open over a real button/link elsewhere on
+      // the page (e.g. the self-serve CTA) just because it happens to sit
+      // within the hover band — that would cover it and swallow the click.
+      const overOtherControl = e.target.closest && e.target.closest("a, button");
+      if (overOtherControl || e.clientY < window.innerHeight - HOVER_ZONE_HEIGHT) {
         setActiveCategory(null);
         return;
       }
