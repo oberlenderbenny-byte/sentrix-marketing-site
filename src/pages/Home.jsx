@@ -4,6 +4,7 @@ import CategoryBar from "../components/CategoryBar";
 import Footer from "../components/Footer";
 import FloorPlanBg from "../components/FloorPlanBg";
 import SelfServeC2 from "../components/SelfServeC2";
+import { IconBolt } from "../components/icons";
 import { categories } from "../data/categories";
 
 export default function Home() {
@@ -46,15 +47,6 @@ export default function Home() {
             bottom gradient above which is tuned for the headline text instead. */}
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-bg/80 via-bg/30 to-transparent" />
         <div className="relative z-10 w-full px-6 md:px-16 pb-24">
-          <button
-            onClick={scrollToSelfServe}
-            className="group flex items-center gap-2 text-xs font-bold tracking-[1.5px] uppercase text-accent bg-accent/10 border border-accent/40 rounded-full pl-3.5 pr-3 py-1.5 mb-4 hover:bg-accent/20 hover:border-accent transition-colors"
-          >
-            New: no security expert needed
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
-              <path d="M9 6l6 6-6 6" />
-            </svg>
-          </button>
           <span className="inline-block text-xs font-bold tracking-[1.5px] uppercase text-accent border border-borderStrong rounded-full px-3.5 py-1.5 mb-6">
             AI-verified physical security
           </span>
@@ -65,6 +57,36 @@ export default function Home() {
             Sentrix brings two decades of tactical C2 experience into a platform built for fast deployment, AI-driven decisions, and every role on your team.
           </p>
         </div>
+
+        {/* Differentiator callout — a credible "this is what sets us apart"
+            claim, not a playful aside. Framed as a feature flag: eyebrow tag,
+            a concrete claim, and a one-line reason to believe it. */}
+        <button
+          onClick={scrollToSelfServe}
+          className="group hidden sm:block absolute top-28 right-6 md:right-16 z-20 w-[280px] text-left bg-panel/95 backdrop-blur border border-accent/50 rounded-lg px-5 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.5)] hover:border-accent transition-colors"
+        >
+          <div className="flex items-center gap-2 mb-2.5">
+            <span className="w-6 h-6 rounded-full bg-accent/15 flex items-center justify-center text-accent">
+              <IconBolt size={13} />
+            </span>
+            <span className="text-[10px] font-bold tracking-[1.5px] uppercase text-accent">
+              Industry first
+            </span>
+          </div>
+          <p className="text-[15px] font-bold text-white leading-snug mb-1.5">
+            No security expert needed to deploy Sentrix
+          </p>
+          <p className="text-[12.5px] text-textDim leading-relaxed mb-2.5">
+            A built-in engine recommends your sensor types, counts, and placement — before you buy anything.
+          </p>
+          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-accent">
+            See how it works
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
+              <path d="M9 6l6 6-6 6" />
+            </svg>
+          </span>
+        </button>
+
         <button
           onClick={scrollToMain}
           className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 text-white/80 hover:text-white transition-colors"

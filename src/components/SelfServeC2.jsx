@@ -24,12 +24,15 @@ const SelfServeC2 = forwardRef(function SelfServeC2({ accent = "#60a5fa" }, ref)
   return (
     <section ref={ref} className="relative border-t border-border px-6 md:px-16 py-24 overflow-hidden">
       <div
-        className="absolute inset-0 bg-cover bg-center opacity-[0.16]"
-        style={{ backgroundImage: "url(/images/hero-camera.jpg)" }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: "url(/images/product-dashboard.jpg)" }}
       />
-      <div className="absolute inset-0 bg-bg/85" />
+      {/* Gradient rather than a flat wash — keeps the dashboard photo visibly
+          alive at the edges while still giving the centered text a readable
+          band, so the section doesn't read as flat/dark like a plain overlay would. */}
+      <div className="absolute inset-0 bg-gradient-to-b from-bg/90 via-bg/80 to-bg/90" />
       <div
-        className="absolute inset-0 opacity-[0.1] pointer-events-none"
+        className="absolute inset-0 opacity-[0.18] pointer-events-none"
         style={{ background: `radial-gradient(circle at 20% 20%, ${accent}, transparent 55%)` }}
       />
       <div className="relative max-w-5xl mx-auto text-center mb-16">
