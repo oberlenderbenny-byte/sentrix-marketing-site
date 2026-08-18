@@ -114,11 +114,41 @@ export default function Home() {
           <p className="text-lg text-textDim max-w-xl mb-2">
             Sentrix brings two decades of tactical C2 experience into a platform built for fast deployment, AI-driven decisions, and every role on your team.
           </p>
+
+          {/* Mobile version of the differentiator callout below — same content,
+              but laid out in-flow under the hero text instead of absolutely
+              positioned, since there's no room to float a card beside the
+              headline on a narrow screen. */}
+          <button
+            onClick={scrollToSelfServe}
+            className="group sm:hidden mt-5 block w-full max-w-sm text-left bg-panel/95 backdrop-blur border border-[#fac775]/55 rounded-lg px-4 py-3.5 shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
+          >
+            <div className="flex items-center gap-2 mb-2">
+              <span className="w-5 h-5 rounded-full bg-[#fac775]/15 flex items-center justify-center text-[#fac775]">
+                <IconBolt size={11} />
+              </span>
+              <span className="text-[9px] font-bold tracking-[1.5px] uppercase text-[#fac775]">
+                Industry first
+              </span>
+            </div>
+            <p className="text-[14px] font-bold text-white leading-snug mb-1">
+              No security expert needed to deploy Sentrix
+            </p>
+            <p className="text-[12px] text-textDim leading-relaxed mb-2">
+              A built-in engine recommends your sensor types, counts, and placement — before you buy anything.
+            </p>
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#fac775]">
+              See how it works
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
+            </span>
+          </button>
         </div>
 
-        {/* Differentiator callout — a credible "this is what sets us apart"
-            claim, not a playful aside. Framed as a feature flag: eyebrow tag,
-            a concrete claim, and a one-line reason to believe it. */}
+        {/* Desktop version — a credible "this is what sets us apart" claim,
+            floated beside the headline. Framed as a feature flag: eyebrow
+            tag, a concrete claim, and a one-line reason to believe it. */}
         <button
           onClick={scrollToSelfServe}
           className="group hidden sm:block absolute top-28 right-6 md:right-16 z-20 w-[280px] text-left bg-panel/95 backdrop-blur border border-[#fac775]/55 rounded-lg px-5 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.5)] hover:border-[#fac775] transition-colors"
