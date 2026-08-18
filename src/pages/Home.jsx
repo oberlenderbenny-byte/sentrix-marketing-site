@@ -34,6 +34,10 @@ export default function Home() {
           style={{ backgroundImage: "url(/images/hero-fence-sunset.jpg)" }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/40 to-bg/10" />
+        {/* Top scrim — keeps the header logo/nav legible regardless of how bright
+            the hero photo is at the top (e.g. a light sky), independent of the
+            bottom gradient above which is tuned for the headline text instead. */}
+        <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-bg/80 via-bg/30 to-transparent" />
         <div className="relative z-10 w-full px-6 md:px-16 pb-24">
           <span className="inline-block text-xs font-bold tracking-[1.5px] uppercase text-accent border border-borderStrong rounded-full px-3.5 py-1.5 mb-6">
             AI-verified physical security
