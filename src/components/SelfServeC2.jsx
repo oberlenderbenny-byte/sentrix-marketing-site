@@ -47,7 +47,7 @@ const SelfServeC2 = forwardRef(function SelfServeC2({ accent = "#60a5fa" }, ref)
           A first for the industry
         </span>
         <h2 className="text-3xl md:text-5xl font-extrabold text-white leading-tight mb-6 max-w-3xl mx-auto">
-          You don't need a security team to stand up a full command &amp; control system
+          Empower your security team
         </h2>
         <p className="text-textDim text-[16px] md:text-[17px] leading-relaxed max-w-2xl mx-auto">
           Sentrix is the first platform that lets anyone — not just trained security professionals —
