@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const SITE_URL = "https://sentrix-marketing-site.vercel.app";
+const SITE_URL = "https://sentrix-labs.com";
 
 function setMeta(attr, key, content) {
   let el = document.head.querySelector(`meta[${attr}="${key}"]`);

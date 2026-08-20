@@ -24,12 +24,12 @@
 
 ## Pages
 
-- [Home](https://sentrix-marketing-site.vercel.app/): product overview, hero pitch, and the self-serve sensor recommendation engine.
-- [Retail](https://sentrix-marketing-site.vercel.app/solutions/retail): loss-prevention correlation, entry/exit monitoring.
-- [Banking & finance](https://sentrix-marketing-site.vercel.app/solutions/banking): vault-grade SLAs, escalation paths.
-- [Warehouse & logistics](https://sentrix-marketing-site.vercel.app/solutions/warehouse): perimeter coverage, gate/dock LPR.
-- [Corporate & offices](https://sentrix-marketing-site.vercel.app/solutions/corporate): AI floor-plan zoning and access control.
-- [Technology](https://sentrix-marketing-site.vercel.app/solutions/technology): platform architecture, AI verification, correlation and SLA engine.
-- [Pricing](https://sentrix-marketing-site.vercel.app/pricing): pricing scales with locations, sensors, and integration depth.
-- [About](https://sentrix-marketing-site.vercel.app/about): company background and tactical C2 origins.
-- [Contact](https://sentrix-marketing-site.vercel.app/contact): demo requests and general inquiries.
+- [Home](https://sentrix-labs.com/): product overview, hero pitch, and the self-serve sensor recommendation engine.
+- [Retail](https://sentrix-labs.com/solutions/retail): loss-prevention correlation, entry/exit monitoring.
+- [Banking & finance](https://sentrix-labs.com/solutions/banking): vault-grade SLAs, escalation paths.
+- [Warehouse & logistics](https://sentrix-labs.com/solutions/warehouse): perimeter coverage, gate/dock LPR.
+- [Corporate & offices](https://sentrix-labs.com/solutions/corporate): AI floor-plan zoning and access control.
+- [Technology](https://sentrix-labs.com/solutions/technology): platform architecture, AI verification, correlation and SLA engine.
+- [Pricing](https://sentrix-labs.com/pricing): pricing scales with locations, sensors, and integration depth.
+- [About](https://sentrix-labs.com/about): company background and tactical C2 origins.
+- [Contact](https://sentrix-labs.com/contact): demo requests and general inquiries.

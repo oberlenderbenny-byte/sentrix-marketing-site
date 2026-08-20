@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://sentrix-marketing-site.vercel.app/</loc>
+    <loc>https://sentrix-labs.com/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://sentrix-marketing-site.vercel.app/solutions/retail</loc>
+    <loc>https://sentrix-labs.com/solutions/retail</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sentrix-marketing-site.vercel.app/solutions/banking</loc>
+    <loc>https://sentrix-labs.com/solutions/banking</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sentrix-marketing-site.vercel.app/solutions/warehouse</loc>
+    <loc>https://sentrix-labs.com/solutions/warehouse</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sentrix-marketing-site.vercel.app/solutions/corporate</loc>
+    <loc>https://sentrix-labs.com/solutions/corporate</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sentrix-marketing-site.vercel.app/solutions/technology</loc>
+    <loc>https://sentrix-labs.com/solutions/technology</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://sentrix-marketing-site.vercel.app/pricing</loc>
+    <loc>https://sentrix-labs.com/pricing</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://sentrix-marketing-site.vercel.app/about</loc>
+    <loc>https://sentrix-labs.com/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://sentrix-marketing-site.vercel.app/contact</loc>
+    <loc>https://sentrix-labs.com/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
