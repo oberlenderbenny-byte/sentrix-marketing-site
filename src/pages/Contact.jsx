@@ -2,30 +2,30 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { submitToInbox } from "../utils/submitForm";
-import useDocumentMeta from "../hooks/useDocumentMeta";
+
+const WEB3FORMS_ACCESS_KEY = "a57cf0aa-f717-45fb-a1fa-03b6efcf7703";
 
 export default function Contact() {
-  useDocumentMeta({
-    title: "Contact",
-    description: "Talk to Sentrix about a demo, pricing, or a partnership — we reply within one business day.",
-    path: "/contact",
-  });
-
-  const [status, setStatus] = useState("idle"); // idle | loading | success | error
+  const [status, setStatus] = useState("idle"); // idle | sending | success | error
   const navigate = useNavigate();
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const form = e.target;
-    if (form.botcheck.checked) return; // honeypot
-    setStatus("loading");
+    setStatus("sending");
+
+    const formData = new FormData(e.target);
+    formData.append("access_key", WEB3FORMS_ACCESS_KEY);
+    formData.append("subject", "New contact form submission — Sentrix");
+
     try {
-      const data = Object.fromEntries(new FormData(form).entries());
-      await submitToInbox(data, { subject: "New contact form submission — Sentrix", formName: "Contact" });
-      setStatus("success");
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: formData,
+      });
+      const result = await response.json();
+      setStatus(result.success ? "success" : "error");
     } catch (err) {
-      console.error(err);
       setStatus("error");
     }
   };
@@ -71,7 +71,6 @@ export default function Contact() {
           </div>
         ) : (
           <form onSubmit={onSubmit} className="flex flex-col gap-3">
-            <input type="checkbox" name="botcheck" className="hidden" tabIndex="-1" autoComplete="off" />
             <div className="grid sm:grid-cols-2 gap-3">
               <input
                 required
@@ -110,14 +109,14 @@ export default function Contact() {
             />
             <button
               type="submit"
-              disabled={status === "loading"}
-              className="bg-accent text-[#04101f] font-bold rounded-md py-3.5 text-sm hover:bg-[#7db4fb] transition-colors disabled:opacity-60"
+              disabled={status === "sending"}
+              className="bg-accent text-[#04101f] font-bold rounded-md py-3.5 text-sm hover:bg-[#7db4fb] transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
-              {status === "loading" ? "Sending…" : "Send message"}
+              {status === "sending" ? "Sending…" : "Send message"}
             </button>
             {status === "error" && (
               <p className="text-xs text-red-400 text-center">
-                Something went wrong — please try again, or email us directly.
+                Something went wrong sending your message. Please try again, or email us directly.
               </p>
             )}
             <p className="text-xs text-textMuted text-center">We'll reply within one business day.</p>
