@@ -19,6 +19,7 @@ const DIFFERENTIATOR_SLIDES = [
     body: "A built-in engine recommends your sensor types, counts, and placement — before you buy anything.",
     cta: "See how it works",
     action: "self-serve",
+    theme: "gold",
   },
   {
     eyebrow: "Built for growth markets",
@@ -27,10 +28,14 @@ const DIFFERENTIATOR_SLIDES = [
     cta: "See warehouse & logistics solutions",
     action: "link",
     href: "/solutions/warehouse",
+    theme: "orange",
   },
 ];
 
-const DIFFERENTIATOR_INTERVAL_MS = 7000;
+// Slower cadence gives each slide's two lines of copy enough time to read
+// comfortably before it rotates; hover/manual navigation still pause or
+// reset the clock on top of this.
+const DIFFERENTIATOR_INTERVAL_MS = 11000;
 
 export default function Home() {
   useDocumentMeta({
@@ -46,6 +51,10 @@ export default function Home() {
   const [activeCategory, setActiveCategory] = useState(null);
   const [differentiatorIdx, setDifferentiatorIdx] = useState(0);
   const [differentiatorPaused, setDifferentiatorPaused] = useState(false);
+  // Bumped whenever the visitor manually picks a slide, so the auto-rotate
+  // timer below restarts from zero instead of cutting a freshly-chosen
+  // slide short.
+  const [differentiatorManualTick, setDifferentiatorManualTick] = useState(0);
 
   useEffect(() => {
     if (differentiatorPaused || DIFFERENTIATOR_SLIDES.length < 2) return;
@@ -53,7 +62,7 @@ export default function Home() {
       setDifferentiatorIdx((i) => (i + 1) % DIFFERENTIATOR_SLIDES.length);
     }, DIFFERENTIATOR_INTERVAL_MS);
     return () => clearInterval(id);
-  }, [differentiatorPaused]);
+  }, [differentiatorPaused, differentiatorManualTick]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -131,6 +140,19 @@ export default function Home() {
       scrollToSelfServe();
     }
   };
+  const goToDifferentiator = (e, i) => {
+    // Dots live inside the clickable card; stop the click from also
+    // triggering the card's own onDifferentiatorClick navigation.
+    e.stopPropagation();
+    setDifferentiatorIdx(i);
+    setDifferentiatorManualTick((t) => t + 1);
+  };
+  const onDifferentiatorKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      onDifferentiatorClick();
+    }
+  };
 
   return (
     <div>
@@ -163,18 +185,27 @@ export default function Home() {
               but laid out in-flow under the hero text instead of absolutely
               positioned, since there's no room to float a card beside the
               headline on a narrow screen. */}
-          <button
+          <div
+            role="button"
+            tabIndex={0}
             onClick={onDifferentiatorClick}
+            onKeyDown={onDifferentiatorKeyDown}
             onMouseEnter={() => setDifferentiatorPaused(true)}
             onMouseLeave={() => setDifferentiatorPaused(false)}
-            className="group sm:hidden mt-5 block w-full max-w-sm text-left bg-panel/95 backdrop-blur border border-[#fac775]/55 rounded-lg px-4 py-3.5 shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
+            className={`group sm:hidden mt-5 block w-full max-w-sm text-left cursor-pointer bg-panel/95 backdrop-blur border rounded-lg px-4 py-3.5 shadow-[0_16px_40px_rgba(0,0,0,0.5)] transition-colors ${
+              activeDifferentiator.theme === "gold" ? "border-[#fac775]/55" : "border-[#d47820]/55"
+            }`}
           >
             <div key={differentiatorIdx} className="banner-fade">
               <div className="flex items-center gap-2 mb-2">
-                <span className="w-5 h-5 rounded-full bg-[#fac775]/15 flex items-center justify-center text-[#fac775]">
+                <span className={`w-5 h-5 rounded-full flex items-center justify-center ${
+                  activeDifferentiator.theme === "gold" ? "bg-[#fac775]/15 text-[#fac775]" : "bg-[#d47820]/15 text-[#d47820]"
+                }`}>
                   <IconBolt size={11} />
                 </span>
-                <span className="text-[9px] font-bold tracking-[1.5px] uppercase text-[#fac775]">
+                <span className={`text-[9px] font-bold tracking-[1.5px] uppercase ${
+                  activeDifferentiator.theme === "gold" ? "text-[#fac775]" : "text-[#d47820]"
+                }`}>
                   {activeDifferentiator.eyebrow}
                 </span>
               </div>
@@ -184,7 +215,9 @@ export default function Home() {
               <p className="text-[12px] text-textDim leading-relaxed mb-2">
                 {activeDifferentiator.body}
               </p>
-              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#fac775]">
+              <span className={`inline-flex items-center gap-1.5 text-xs font-bold ${
+                activeDifferentiator.theme === "gold" ? "text-[#fac775]" : "text-[#d47820]"
+              }`}>
                 {activeDifferentiator.cta}
                 <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
                   <path d="M9 6l6 6-6 6" />
@@ -192,35 +225,54 @@ export default function Home() {
               </span>
             </div>
             {DIFFERENTIATOR_SLIDES.length > 1 && (
-              <div className="flex items-center gap-1.5 mt-3">
-                {DIFFERENTIATOR_SLIDES.map((_, i) => (
-                  <span
+              <div className="flex items-center gap-3 mt-3">
+                {DIFFERENTIATOR_SLIDES.map((slide, i) => (
+                  <button
                     key={i}
-                    className={`h-1 rounded-full transition-all ${
-                      i === differentiatorIdx ? "w-4 bg-[#fac775]" : "w-1 bg-[#fac775]/30"
-                    }`}
-                  />
+                    type="button"
+                    onClick={(e) => goToDifferentiator(e, i)}
+                    aria-label={`Show slide ${i + 1}: ${slide.eyebrow}`}
+                    aria-current={i === differentiatorIdx}
+                    className="p-1.5 -m-1.5"
+                  >
+                    <span
+                      className={`block h-1 rounded-full transition-all ${
+                        i === differentiatorIdx
+                          ? slide.theme === "gold" ? "w-4 bg-[#fac775]" : "w-4 bg-[#d47820]"
+                          : slide.theme === "gold" ? "w-1 bg-[#fac775]/30" : "w-1 bg-[#d47820]/30"
+                      }`}
+                    />
+                  </button>
                 ))}
               </div>
             )}
-          </button>
+          </div>
         </div>
 
         {/* Desktop version — a credible "this is what sets us apart" claim,
             floated beside the headline. Framed as a feature flag: eyebrow
             tag, a concrete claim, and a one-line reason to believe it. */}
-        <button
+        <div
+          role="button"
+          tabIndex={0}
           onClick={onDifferentiatorClick}
+          onKeyDown={onDifferentiatorKeyDown}
           onMouseEnter={() => setDifferentiatorPaused(true)}
           onMouseLeave={() => setDifferentiatorPaused(false)}
-          className="group hidden sm:block absolute top-28 right-6 md:right-16 z-20 w-[280px] text-left bg-panel/95 backdrop-blur border border-[#fac775]/55 rounded-lg px-5 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.5)] hover:border-[#fac775] transition-colors"
+          className={`group hidden sm:block absolute top-28 right-6 md:right-16 z-20 w-[280px] text-left cursor-pointer bg-panel/95 backdrop-blur border rounded-lg px-5 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.5)] transition-colors ${
+            activeDifferentiator.theme === "gold" ? "border-[#fac775]/55 hover:border-[#fac775]" : "border-[#d47820]/55 hover:border-[#d47820]"
+          }`}
         >
           <div key={differentiatorIdx} className="banner-fade">
             <div className="flex items-center gap-2 mb-2.5">
-              <span className="w-6 h-6 rounded-full bg-[#fac775]/15 flex items-center justify-center text-[#fac775]">
+              <span className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                activeDifferentiator.theme === "gold" ? "bg-[#fac775]/15 text-[#fac775]" : "bg-[#d47820]/15 text-[#d47820]"
+              }`}>
                 <IconBolt size={13} />
               </span>
-              <span className="text-[10px] font-bold tracking-[1.5px] uppercase text-[#fac775]">
+              <span className={`text-[10px] font-bold tracking-[1.5px] uppercase ${
+                activeDifferentiator.theme === "gold" ? "text-[#fac775]" : "text-[#d47820]"
+              }`}>
                 {activeDifferentiator.eyebrow}
               </span>
             </div>
@@ -230,7 +282,9 @@ export default function Home() {
             <p className="text-[12.5px] text-textDim leading-relaxed mb-2.5">
               {activeDifferentiator.body}
             </p>
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#fac775]">
+            <span className={`inline-flex items-center gap-1.5 text-xs font-bold ${
+              activeDifferentiator.theme === "gold" ? "text-[#fac775]" : "text-[#d47820]"
+            }`}>
               {activeDifferentiator.cta}
               <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
                 <path d="M9 6l6 6-6 6" />
@@ -238,18 +292,28 @@ export default function Home() {
             </span>
           </div>
           {DIFFERENTIATOR_SLIDES.length > 1 && (
-            <div className="flex items-center gap-1.5 mt-3">
-              {DIFFERENTIATOR_SLIDES.map((_, i) => (
-                <span
+            <div className="flex items-center gap-3 mt-3">
+              {DIFFERENTIATOR_SLIDES.map((slide, i) => (
+                <button
                   key={i}
-                  className={`h-1 rounded-full transition-all ${
-                    i === differentiatorIdx ? "w-4 bg-[#fac775]" : "w-1 bg-[#fac775]/30"
-                  }`}
-                />
+                  type="button"
+                  onClick={(e) => goToDifferentiator(e, i)}
+                  aria-label={`Show slide ${i + 1}: ${slide.eyebrow}`}
+                  aria-current={i === differentiatorIdx}
+                  className="p-1.5 -m-1.5"
+                >
+                  <span
+                    className={`block h-1 rounded-full transition-all ${
+                      i === differentiatorIdx
+                        ? slide.theme === "gold" ? "w-4 bg-[#fac775]" : "w-4 bg-[#d47820]"
+                        : slide.theme === "gold" ? "w-1 bg-[#fac775]/30" : "w-1 bg-[#d47820]/30"
+                    }`}
+                  />
+                </button>
               ))}
             </div>
           )}
-        </button>
+        </div>
 
         <button
           onClick={scrollToMain}
