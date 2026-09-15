@@ -1,5 +1,23 @@
 export const categories = [
   {
+    slug: "warehouse",
+    name: "Warehouse & logistics",
+    accent: "#d47820",
+    image: "/images/warehouse-facility.jpg",
+    tagline: "Every gate, dock, and aisle, correlated",
+    blurb: "Wide-perimeter coverage with license-plate recognition at gates and loading docks.",
+    subcategories: ["Gate & dock LPR", "Perimeter coverage", "Inventory zones"],
+    description:
+      "Wide-perimeter fence lines, loading docks, and gate traffic are covered together — license-plate recognition at entry points correlates with motion and door sensors deeper in the facility to cut false alarms.",
+    useCases: [
+      "Unregistered vehicle at a gate or loading dock",
+      "Pedestrian activity in a forklift-only aisle",
+      "Fence-line cut or climb-over detection",
+      "Dock door open outside a scheduled shipment window",
+      "High-value inventory zone accessed off-schedule",
+    ],
+  },
+  {
     slug: "retail",
     name: "Retail",
     accent: "#22c55e",
@@ -33,24 +51,6 @@ export const categories = [
       "Tailgating into a cash-handling room",
       "ATM tamper or skimmer-installation attempt",
       "Duress/panic signal auto-escalated with live video",
-    ],
-  },
-  {
-    slug: "warehouse",
-    name: "Warehouse & logistics",
-    accent: "#d47820",
-    image: "/images/warehouse-facility.jpg",
-    tagline: "Every gate, dock, and aisle, correlated",
-    blurb: "Wide-perimeter coverage with license-plate recognition at gates and loading docks.",
-    subcategories: ["Gate & dock LPR", "Perimeter coverage", "Inventory zones"],
-    description:
-      "Wide-perimeter fence lines, loading docks, and gate traffic are covered together — license-plate recognition at entry points correlates with motion and door sensors deeper in the facility to cut false alarms.",
-    useCases: [
-      "Unregistered vehicle at a gate or loading dock",
-      "Pedestrian activity in a forklift-only aisle",
-      "Fence-line cut or climb-over detection",
-      "Dock door open outside a scheduled shipment window",
-      "High-value inventory zone accessed off-schedule",
     ],
   },
   {

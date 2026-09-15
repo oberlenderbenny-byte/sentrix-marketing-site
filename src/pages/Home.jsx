@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import CategoryBar from "../components/CategoryBar";
 import Footer from "../components/Footer";
@@ -8,17 +9,51 @@ import { IconBolt } from "../components/icons";
 import { categories } from "../data/categories";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 
+// Rotating hero differentiator callout. Each slide keeps the same visual
+// container (eyebrow tag, bold claim, one-line reason to believe it, CTA)
+// so the rotation reads as one consistent feature, not a carousel of ads.
+const DIFFERENTIATOR_SLIDES = [
+  {
+    eyebrow: "Industry first",
+    title: "No security expert needed to deploy Sentrix",
+    body: "A built-in engine recommends your sensor types, counts, and placement — before you buy anything.",
+    cta: "See how it works",
+    action: "self-serve",
+  },
+  {
+    eyebrow: "Built for growth markets",
+    title: "Purpose-built for Texas & Florida warehouses",
+    body: "Matched to the pace of the region's logistics and industrial growth, with deployment that keeps up.",
+    cta: "See warehouse & logistics solutions",
+    action: "link",
+    href: "/solutions/warehouse",
+  },
+];
+
+const DIFFERENTIATOR_INTERVAL_MS = 7000;
+
 export default function Home() {
   useDocumentMeta({
     description: "Sentrix is an AI-verified command-and-control platform for physical security. Deploy a full monitoring system yourself — no security expert needed.",
     path: "/",
   });
 
+  const navigate = useNavigate();
   const mainRef = useRef(null);
   const selfServeRef = useRef(null);
   const barWrapperRef = useRef(null);
   const [showBar, setShowBar] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
+  const [differentiatorIdx, setDifferentiatorIdx] = useState(0);
+  const [differentiatorPaused, setDifferentiatorPaused] = useState(false);
+
+  useEffect(() => {
+    if (differentiatorPaused || DIFFERENTIATOR_SLIDES.length < 2) return;
+    const id = setInterval(() => {
+      setDifferentiatorIdx((i) => (i + 1) % DIFFERENTIATOR_SLIDES.length);
+    }, DIFFERENTIATOR_INTERVAL_MS);
+    return () => clearInterval(id);
+  }, [differentiatorPaused]);
 
   useEffect(() => {
     const onScroll = () => {
@@ -88,6 +123,15 @@ export default function Home() {
     selfServeRef.current?.scrollIntoView({ behavior: "smooth" });
   };
 
+  const activeDifferentiator = DIFFERENTIATOR_SLIDES[differentiatorIdx];
+  const onDifferentiatorClick = () => {
+    if (activeDifferentiator.action === "link" && activeDifferentiator.href) {
+      navigate(activeDifferentiator.href);
+    } else {
+      scrollToSelfServe();
+    }
+  };
+
   return (
     <div>
       <Header onHamburger={scrollToMain} dark={showBar} />
@@ -120,29 +164,45 @@ export default function Home() {
               positioned, since there's no room to float a card beside the
               headline on a narrow screen. */}
           <button
-            onClick={scrollToSelfServe}
+            onClick={onDifferentiatorClick}
+            onMouseEnter={() => setDifferentiatorPaused(true)}
+            onMouseLeave={() => setDifferentiatorPaused(false)}
             className="group sm:hidden mt-5 block w-full max-w-sm text-left bg-panel/95 backdrop-blur border border-[#fac775]/55 rounded-lg px-4 py-3.5 shadow-[0_16px_40px_rgba(0,0,0,0.5)]"
           >
-            <div className="flex items-center gap-2 mb-2">
-              <span className="w-5 h-5 rounded-full bg-[#fac775]/15 flex items-center justify-center text-[#fac775]">
-                <IconBolt size={11} />
-              </span>
-              <span className="text-[9px] font-bold tracking-[1.5px] uppercase text-[#fac775]">
-                Industry first
+            <div key={differentiatorIdx} className="banner-fade">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-5 h-5 rounded-full bg-[#fac775]/15 flex items-center justify-center text-[#fac775]">
+                  <IconBolt size={11} />
+                </span>
+                <span className="text-[9px] font-bold tracking-[1.5px] uppercase text-[#fac775]">
+                  {activeDifferentiator.eyebrow}
+                </span>
+              </div>
+              <p className="text-[14px] font-bold text-white leading-snug mb-1">
+                {activeDifferentiator.title}
+              </p>
+              <p className="text-[12px] text-textDim leading-relaxed mb-2">
+                {activeDifferentiator.body}
+              </p>
+              <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#fac775]">
+                {activeDifferentiator.cta}
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
+                  <path d="M9 6l6 6-6 6" />
+                </svg>
               </span>
             </div>
-            <p className="text-[14px] font-bold text-white leading-snug mb-1">
-              No security expert needed to deploy Sentrix
-            </p>
-            <p className="text-[12px] text-textDim leading-relaxed mb-2">
-              A built-in engine recommends your sensor types, counts, and placement — before you buy anything.
-            </p>
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#fac775]">
-              See how it works
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
-                <path d="M9 6l6 6-6 6" />
-              </svg>
-            </span>
+            {DIFFERENTIATOR_SLIDES.length > 1 && (
+              <div className="flex items-center gap-1.5 mt-3">
+                {DIFFERENTIATOR_SLIDES.map((_, i) => (
+                  <span
+                    key={i}
+                    className={`h-1 rounded-full transition-all ${
+                      i === differentiatorIdx ? "w-4 bg-[#fac775]" : "w-1 bg-[#fac775]/30"
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
           </button>
         </div>
 
@@ -150,29 +210,45 @@ export default function Home() {
             floated beside the headline. Framed as a feature flag: eyebrow
             tag, a concrete claim, and a one-line reason to believe it. */}
         <button
-          onClick={scrollToSelfServe}
+          onClick={onDifferentiatorClick}
+          onMouseEnter={() => setDifferentiatorPaused(true)}
+          onMouseLeave={() => setDifferentiatorPaused(false)}
           className="group hidden sm:block absolute top-28 right-6 md:right-16 z-20 w-[280px] text-left bg-panel/95 backdrop-blur border border-[#fac775]/55 rounded-lg px-5 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.5)] hover:border-[#fac775] transition-colors"
         >
-          <div className="flex items-center gap-2 mb-2.5">
-            <span className="w-6 h-6 rounded-full bg-[#fac775]/15 flex items-center justify-center text-[#fac775]">
-              <IconBolt size={13} />
-            </span>
-            <span className="text-[10px] font-bold tracking-[1.5px] uppercase text-[#fac775]">
-              Industry first
+          <div key={differentiatorIdx} className="banner-fade">
+            <div className="flex items-center gap-2 mb-2.5">
+              <span className="w-6 h-6 rounded-full bg-[#fac775]/15 flex items-center justify-center text-[#fac775]">
+                <IconBolt size={13} />
+              </span>
+              <span className="text-[10px] font-bold tracking-[1.5px] uppercase text-[#fac775]">
+                {activeDifferentiator.eyebrow}
+              </span>
+            </div>
+            <p className="text-[15px] font-bold text-white leading-snug mb-1.5">
+              {activeDifferentiator.title}
+            </p>
+            <p className="text-[12.5px] text-textDim leading-relaxed mb-2.5">
+              {activeDifferentiator.body}
+            </p>
+            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#fac775]">
+              {activeDifferentiator.cta}
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
+                <path d="M9 6l6 6-6 6" />
+              </svg>
             </span>
           </div>
-          <p className="text-[15px] font-bold text-white leading-snug mb-1.5">
-            No security expert needed to deploy Sentrix
-          </p>
-          <p className="text-[12.5px] text-textDim leading-relaxed mb-2.5">
-            A built-in engine recommends your sensor types, counts, and placement — before you buy anything.
-          </p>
-          <span className="inline-flex items-center gap-1.5 text-xs font-bold text-[#fac775]">
-            See how it works
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="transition-transform group-hover:translate-x-0.5">
-              <path d="M9 6l6 6-6 6" />
-            </svg>
-          </span>
+          {DIFFERENTIATOR_SLIDES.length > 1 && (
+            <div className="flex items-center gap-1.5 mt-3">
+              {DIFFERENTIATOR_SLIDES.map((_, i) => (
+                <span
+                  key={i}
+                  className={`h-1 rounded-full transition-all ${
+                    i === differentiatorIdx ? "w-4 bg-[#fac775]" : "w-1 bg-[#fac775]/30"
+                  }`}
+                />
+              ))}
+            </div>
+          )}
         </button>
 
         <button

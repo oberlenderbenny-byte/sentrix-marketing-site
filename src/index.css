@@ -76,3 +76,17 @@ a { color: inherit; text-decoration: none; }
     animation: none;
   }
 }
+
+/* Rotating hero differentiator callout: gentle crossfade on each slide change */
+.banner-fade {
+  animation: bannerFadeIn 0.5s ease;
+}
+@keyframes bannerFadeIn {
+  from { opacity: 0; transform: translateY(3px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .banner-fade {
+    animation: none;
+  }
+}
