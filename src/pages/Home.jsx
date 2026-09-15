@@ -5,7 +5,7 @@ import CategoryBar from "../components/CategoryBar";
 import Footer from "../components/Footer";
 import FloorPlanBg from "../components/FloorPlanBg";
 import SelfServeC2 from "../components/SelfServeC2";
-import { IconBolt } from "../components/icons";
+import { IconBolt, IconTarget } from "../components/icons";
 import { categories } from "../data/categories";
 import useDocumentMeta from "../hooks/useDocumentMeta";
 
@@ -20,6 +20,7 @@ const DIFFERENTIATOR_SLIDES = [
     cta: "See how it works",
     action: "self-serve",
     theme: "gold",
+    icon: IconBolt,
   },
   {
     eyebrow: "Built for growth markets",
@@ -29,6 +30,7 @@ const DIFFERENTIATOR_SLIDES = [
     action: "link",
     href: "/solutions/warehouse",
     theme: "orange",
+    icon: IconTarget,
   },
 ];
 
@@ -153,6 +155,7 @@ export default function Home() {
       onDifferentiatorClick();
     }
   };
+  const DifferentiatorIcon = activeDifferentiator.icon;
 
   return (
     <div>
@@ -192,8 +195,8 @@ export default function Home() {
             onKeyDown={onDifferentiatorKeyDown}
             onMouseEnter={() => setDifferentiatorPaused(true)}
             onMouseLeave={() => setDifferentiatorPaused(false)}
-            className={`group sm:hidden mt-5 block w-full max-w-sm text-left cursor-pointer bg-panel/95 backdrop-blur border rounded-lg px-4 py-3.5 shadow-[0_16px_40px_rgba(0,0,0,0.5)] transition-colors ${
-              activeDifferentiator.theme === "gold" ? "border-[#fac775]/55" : "border-[#d47820]/55"
+            className={`group sm:hidden mt-5 block w-full max-w-sm text-left cursor-pointer backdrop-blur border rounded-lg px-4 py-3.5 shadow-[0_16px_40px_rgba(0,0,0,0.5)] transition-colors ${
+              activeDifferentiator.theme === "gold" ? "bg-panel/95 border-[#fac775]/55" : "bg-[#1a1207]/95 border-[#d47820]/55"
             }`}
           >
             <div key={differentiatorIdx} className="banner-fade">
@@ -201,7 +204,7 @@ export default function Home() {
                 <span className={`w-5 h-5 rounded-full flex items-center justify-center ${
                   activeDifferentiator.theme === "gold" ? "bg-[#fac775]/15 text-[#fac775]" : "bg-[#d47820]/15 text-[#d47820]"
                 }`}>
-                  <IconBolt size={11} />
+                  <DifferentiatorIcon size={11} />
                 </span>
                 <span className={`text-[9px] font-bold tracking-[1.5px] uppercase ${
                   activeDifferentiator.theme === "gold" ? "text-[#fac775]" : "text-[#d47820]"
@@ -259,8 +262,8 @@ export default function Home() {
           onKeyDown={onDifferentiatorKeyDown}
           onMouseEnter={() => setDifferentiatorPaused(true)}
           onMouseLeave={() => setDifferentiatorPaused(false)}
-          className={`group hidden sm:block absolute top-28 right-6 md:right-16 z-20 w-[280px] text-left cursor-pointer bg-panel/95 backdrop-blur border rounded-lg px-5 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.5)] transition-colors ${
-            activeDifferentiator.theme === "gold" ? "border-[#fac775]/55 hover:border-[#fac775]" : "border-[#d47820]/55 hover:border-[#d47820]"
+          className={`group hidden sm:block absolute top-28 right-6 md:right-16 z-20 w-[280px] text-left cursor-pointer backdrop-blur border rounded-lg px-5 py-4 shadow-[0_16px_40px_rgba(0,0,0,0.5)] transition-colors ${
+            activeDifferentiator.theme === "gold" ? "bg-panel/95 border-[#fac775]/55 hover:border-[#fac775]" : "bg-[#1a1207]/95 border-[#d47820]/55 hover:border-[#d47820]"
           }`}
         >
           <div key={differentiatorIdx} className="banner-fade">
@@ -268,7 +271,7 @@ export default function Home() {
               <span className={`w-6 h-6 rounded-full flex items-center justify-center ${
                 activeDifferentiator.theme === "gold" ? "bg-[#fac775]/15 text-[#fac775]" : "bg-[#d47820]/15 text-[#d47820]"
               }`}>
-                <IconBolt size={13} />
+                <DifferentiatorIcon size={13} />
               </span>
               <span className={`text-[10px] font-bold tracking-[1.5px] uppercase ${
                 activeDifferentiator.theme === "gold" ? "text-[#fac775]" : "text-[#d47820]"
