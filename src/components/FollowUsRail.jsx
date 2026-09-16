@@ -48,7 +48,9 @@ export default function FollowUsRail() {
         </svg>
       </a>
       <a
-        href="#"
+        href="https://www.linkedin.com/company/sentrix-labs-com/"
+        target="_blank"
+        rel="noopener noreferrer"
         aria-label="LinkedIn"
         className="w-9 h-9 rounded-full bg-white flex items-center justify-center hover:scale-105 transition-transform"
       >
