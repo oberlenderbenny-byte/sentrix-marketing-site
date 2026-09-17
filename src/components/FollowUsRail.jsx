@@ -27,7 +27,7 @@ export default function FollowUsRail() {
 
   // Shared look for the rail's icon buttons: a dark, brand-outlined circle
   // that fills solid on hover, rather than the plain white-circle treatment
-  // this was originally adapted from — keeps the same slot/convention while
+  // this was originally adapted from - keeps the same slot/convention while
   // reading as distinctly ours.
   const iconButtonClass =
     "relative w-9 h-9 rounded-full border border-accent/50 bg-panel/80 backdrop-blur-sm flex items-center justify-center text-accent transition-all duration-200 hover:bg-accent hover:text-bg hover:border-accent hover:shadow-[0_0_18px_rgba(96,165,250,0.55)]";
@@ -51,7 +51,7 @@ export default function FollowUsRail() {
       <div className="group relative">
         <button
           type="button"
-          aria-label="YouTube — coming soon"
+          aria-label="YouTube - coming soon"
           className={`${iconButtonClass} cursor-default`}
         >
           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
@@ -60,7 +60,7 @@ export default function FollowUsRail() {
         </button>
         <span className={tooltipClass}>Coming soon</span>
       </div>
-      
+      <a
         href="https://www.linkedin.com/company/sentrix-labs-com/"
         target="_blank"
         rel="noopener noreferrer"
