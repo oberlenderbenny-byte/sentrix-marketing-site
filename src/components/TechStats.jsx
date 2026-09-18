@@ -13,7 +13,7 @@ const STATS = [
   },
   {
     Icon: IconClock,
-    title: "Sub-second AI verification",
+    title: "Real-time AI verification",
     desc: "Vision and reasoning models score each alert before it ever reaches an operator.",
   },
   {

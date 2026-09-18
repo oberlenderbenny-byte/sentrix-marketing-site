@@ -25,7 +25,7 @@ const CAPABILITY_BY_SLUG = {
     eyebrow: "Response, not just detection",
     title: "Every vault alert ships with its own response plan",
     description:
-      "Sentrix doesn't just flag a vault or cash-zone event — it generates the specific response steps for that alert (lock down the zone, call the right number, notify the branch manager) and starts an SLA clock the moment the sensor fires, so escalation is timed and auditable, not informal.",
+      "Sentrix doesn't just flag a vault or cash-zone event — it generates the specific response steps for that alert (lock down the zone, call the right number, notify the branch manager) and starts an SLA clock the moment the sensor fires, so escalation is timed, not informal.",
     image: "/images/cap-sop.jpg",
     imageAlt: "AI-generated SOP and SLA tracking on a live alert",
   },

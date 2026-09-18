@@ -6,7 +6,7 @@ const PLATFORM_FEATURES = [
   { num: "01", title: "Rapid deployment", body: "Significantly faster to implement and roll out than legacy command-and-control systems — at a fraction of the cost." },
   { num: "02", title: "AI-verified alerts", body: "Vision and reasoning models triage each event before it reaches a human, cutting operator and analyst response time." },
   { num: "03", title: "Incident correlation & SLA", body: "Related sensor triggers merge into one incident, tracked end to end against detection and response SLAs." },
-  { num: "04", title: "AI-driven management insights", body: "Real-time patterns and recommendations for decision-makers — decisions, not just dashboards." },
+  { num: "04", title: "AI-driven management insights", body: "Real-time visibility into patterns and incidents for decision-makers — insight, not just dashboards." },
   { num: "05", title: "Role-tailored experience", body: "A different view of the same data for operators, commanders, and analysts — each gets what they need." },
   { num: "06", title: "Multi-location, multi-tenant", body: "Every location, sensor, and camera on one map, with organizations and role-based access built in from day one." },
 ];

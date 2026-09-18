@@ -10,7 +10,7 @@ const PILLARS = [
   },
   {
     title: "Response, built in",
-    body: "Every alert generates its own response steps and starts an SLA clock the moment the sensor fires. Operators dismiss, close with a reason, or escalate — and the clock tracks it the whole way.",
+    body: "Every alert generates its own response steps and starts an SLA clock the moment the sensor fires. Operators dismiss, close with a reason, or escalate — tracked from trigger through resolution.",
   },
   {
     title: "Threat intelligence, before day one",

@@ -3,7 +3,7 @@ const CAPABILITIES = [
     eyebrow: "Response, not just detection",
     title: "Every alert ships with its own response plan",
     description:
-      "Sentrix doesn't just flag an event — it generates the specific response steps for that alert (activate the fire system, call the right number, start evacuation, notify the manager) and starts an SLA clock the moment the sensor fires. Operators dismiss, close with a reason, or escalate, and the clock tracks it the whole way.",
+      "Sentrix doesn't just flag an event — it generates the specific response steps for that alert (activate the fire system, call the right number, start evacuation, notify the manager) and starts an SLA clock the moment the sensor fires. Operators dismiss, close with a reason, or escalate, with response time tracked from trigger through resolution.",
     image: "/images/cap-sop.jpg",
   },
   {
@@ -74,7 +74,7 @@ export default function PlatformCapabilities({ accent = "#06b6d4" }) {
           "Correlation rules merge related sensors into one incident",
           "Reference scenarios refined against external data sources",
           "Sensor placement & type recommended before purchase",
-          "Cross-location AI summaries for security managers",
+          "AI-summarized incidents for security managers",
         ].map((item) => (
           <span
             key={item}

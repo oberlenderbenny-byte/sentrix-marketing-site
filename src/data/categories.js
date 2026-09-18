@@ -32,7 +32,7 @@ export const categories = [
       "Exit-door propped open outside store hours",
       "POS void/refund spike correlated with a camera feed",
       "After-hours motion in the stockroom or loading bay",
-      "Repeat visits from a flagged license plate or face match",
+      "Repeat visits from a flagged license plate",
     ],
   },
   {
@@ -80,13 +80,13 @@ export const categories = [
     blurb: "AI-verified alerts, incident correlation, SLA tracking, and management insights, in a platform built for rapid deployment.",
     subcategories: ["Rapid deployment", "AI-verified alerts", "Incident correlation & SLA"],
     description:
-      "Every alert is correlated, AI-verified, and tracked against SLA before it reaches an operator. Vision and reasoning models triage each event, related sensor triggers merge into one incident, and decision-makers get real-time patterns and recommendations across every location, sensor, and camera on one map.",
+      "Every alert is correlated, AI-verified, and tracked against SLA before it reaches an operator. Vision and reasoning models triage each event, related sensor triggers merge into one incident, and decision-makers get real-time visibility across every location, sensor, and camera on one map.",
     useCases: [
       "Multiple sensor triggers merged into a single incident",
       "Low-confidence alert auto-suppressed before it reaches an operator",
       "Live video attached automatically to a verified alert",
       "SLA countdown started the moment a sensor fires",
-      "Cross-location pattern flagged for a security manager to review",
+      "Recurring cross-sensor pattern flagged for a security manager to review",
     ],
   },
 ];
