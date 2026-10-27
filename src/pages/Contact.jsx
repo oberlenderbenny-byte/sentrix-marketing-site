@@ -2,10 +2,17 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import useDocumentMeta from "../hooks/useDocumentMeta";
 
 const WEB3FORMS_ACCESS_KEY = "a57cf0aa-f717-45fb-a1fa-03b6efcf7703";
 
 export default function Contact() {
+  useDocumentMeta({
+    title: "Contact",
+    description: "Talk to Sentrix about a demo, pricing, or a partnership — we reply within one business day.",
+    path: "/contact",
+  });
+
   const [status, setStatus] = useState("idle"); // idle | sending | success | error
   const navigate = useNavigate();
 

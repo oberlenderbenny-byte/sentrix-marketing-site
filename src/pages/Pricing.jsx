@@ -1,7 +1,31 @@
 import { Link, useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import FAQ from "../components/FAQ";
 import useDocumentMeta from "../hooks/useDocumentMeta";
+
+const FAQ_ITEMS = [
+  {
+    q: "How is Sentrix priced?",
+    a: "Per deployment, based on the number of locations, sensors per location, and how deep the correlation and SLA setup needs to go. There's no public price list — pricing is scoped on a short call since no two locations look the same.",
+  },
+  {
+    q: "Do I need a dedicated security expert to deploy Sentrix?",
+    a: "No. Sentrix includes a built-in recommendation engine that analyzes a site and tells you which sensor types to use, how many, and where to place them, before any hardware goes up.",
+  },
+  {
+    q: "What sensors and hardware does Sentrix work with?",
+    a: "Cameras, access control, motion sensors, license-plate recognition, and panic buttons — either hardware you already have deployed or new installations.",
+  },
+  {
+    q: "Can Sentrix keep video and alert data on-site instead of in the cloud?",
+    a: "Yes. Sentrix's AI layer is provider-agnostic and supports local/on-prem models for sites that need data to stay on-site, alongside cloud model options.",
+  },
+  {
+    q: "How long does it take to deploy Sentrix at a new location?",
+    a: "Deployment is significantly faster than legacy command-and-control systems, since the sensor recommendation engine removes the need for a separate site survey before you order hardware.",
+  },
+];
 
 const FACTORS = [
   { label: "Number of locations", body: "One HQ or a hundred branches — the platform scales the same way." },
@@ -156,6 +180,8 @@ export default function Pricing() {
           ))}
         </div>
       </section>
+
+      <FAQ items={FAQ_ITEMS} />
 
       <section className="px-6 md:px-16 py-20 border-t border-border text-center">
         <h2 className="text-2xl md:text-3xl font-extrabold text-white mb-5">Get a quote for your locations</h2>

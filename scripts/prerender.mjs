@@ -13,9 +13,15 @@
 // files into the deploy automatically, with no browser involved at build
 // time. Re-run this script and commit again whenever page content changes.
 //
-// The "/" route is intentionally skipped: Vite's own root index.html template
-// already carries solid meta/OG/JSON-LD tags, and writing a prerendered file
-// to public/index.html would collide with that template during build.
+// The "/" (home) route is handled differently from the rest: writing a
+// rendered snapshot straight to `public/index.html` would collide with
+// Vite's own processed index.html (the one with correct hashed/stable asset
+// tags), since files in `public/` are copied over the build output. Instead
+// the home route's rendered body is captured into `public/_home-body.html`
+// (a plain fragment, not a full page) and `scripts/inject-home.mjs` splices
+// it into `dist/index.html` after every `vite build` — see that script and
+// the `build` entry in package.json. That splice step does not need a
+// browser, so it runs fine on Vercel.
 
 import { preview } from "vite";
 import { chromium } from "playwright";
@@ -49,6 +55,12 @@ async function main() {
     await writeFile(path.join(outDir, "index.html"), html, "utf-8");
     console.log(`Prerendered ${route} -> ${outDir}/index.html`);
   }
+
+  // Home route: capture only the #root fragment, not a full document.
+  await page.goto(base + "/", { waitUntil: "networkidle" });
+  const rootHtml = await page.$eval("#root", (el) => el.outerHTML);
+  await writeFile(path.join("public", "_home-body.html"), rootHtml, "utf-8");
+  console.log("Prerendered / -> public/_home-body.html (spliced into dist/index.html at build time)");
 
   await browser.close();
   await new Promise((resolve) => server.httpServer.close(resolve));
