@@ -1,11 +1,3 @@
 {
-  "redirects": [
-    {
-      "source": "/:path*",
-      "has": [{ "type": "host", "value": "www.sentrix-labs.com" }],
-      "destination": "https://sentrix-labs.com/:path*",
-      "permanent": true
-    }
-  ],
   "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
